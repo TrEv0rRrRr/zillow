@@ -15,7 +15,7 @@ public record Money(
     @NotNull(message = "currency is required") String currency) {
 
   public Money {
-    if (!"USD".equals(currency))
-      throw new IllegalArgumentException("Currency must be 'USD.");
+    if (currency != null && !"USD".equals(currency.trim()))
+      throw new IllegalArgumentException("Currency must be 'USD'. Received: '" + currency + "'");
   }
 }
