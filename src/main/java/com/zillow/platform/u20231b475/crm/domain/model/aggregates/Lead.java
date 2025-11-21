@@ -28,64 +28,64 @@ import lombok.Getter;
 @Entity
 @Getter
 public class Lead extends AuditableAbstractAggregateRoot<Lead> {
-    @Embedded
-    @AttributeOverride(name = "id", column = @Column(name = "seller_id"))
-    private SellerId sellerId;
+        @Embedded
+        @AttributeOverride(name = "id", column = @Column(name = "seller_id"))
+        private SellerId sellerId;
 
-    @Embedded
-    private EmailAddress email;
+        @Embedded
+        private EmailAddress email;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "age", column = @Column(name = "age")),
-            @AttributeOverride(name = "incomeLevel", column = @Column(name = "income_level"))
-    })
-    private PersonalInfo personalInfo;
+        @Embedded
+        @AttributeOverrides({
+                        @AttributeOverride(name = "age", column = @Column(name = "age")),
+                        @AttributeOverride(name = "incomeLevel", column = @Column(name = "income_level"))
+        })
+        private PersonalInfo personalInfo;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "fullName", column = @Column(name = "full_name")),
-            @AttributeOverride(name = "phone", column = @Column(name = "phone"))
-    })
-    private ContactInfo contactInfo;
+        @Embedded
+        @AttributeOverrides({
+                        @AttributeOverride(name = "fullName", column = @Column(name = "full_name")),
+                        @AttributeOverride(name = "phone", column = @Column(name = "phone"))
+        })
+        private ContactInfo contactInfo;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "locationPreference", column = @Column(name = "location_preference")),
-            @AttributeOverride(name = "minBedrooms", column = @Column(name = "min_bedrooms"))
-    })
-    private PurchaseIntent purchaseIntent;
+        @Embedded
+        @AttributeOverrides({
+                        @AttributeOverride(name = "locationPreference", column = @Column(name = "location_preference")),
+                        @AttributeOverride(name = "minBedrooms", column = @Column(name = "min_bedrooms"))
+        })
+        private PurchaseIntent purchaseIntent;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "amount", column = @Column(name = "amount")),
-            @AttributeOverride(name = "currency", column = @Column(name = "currency"))
-    })
-    private Money bugdet;
+        @Embedded
+        @AttributeOverrides({
+                        @AttributeOverride(name = "amount", column = @Column(name = "amount")),
+                        @AttributeOverride(name = "currency", column = @Column(name = "currency"))
+        })
+        private Money bugdet;
 
-    @Enumerated(EnumType.STRING)
-    private LeadSource source;
+        @Enumerated(EnumType.STRING)
+        private LeadSource source;
 
-    @Enumerated(EnumType.STRING)
-    private LeadStatus status;
+        @Enumerated(EnumType.STRING)
+        private LeadStatus status;
 
-    public Lead() {
-    }
+        public Lead() {
+        }
 
-    public Lead(CreateLeadCommand command) {
-        this.sellerId = new SellerId(command.sellerId());
-        this.email = new EmailAddress(command.email());
-        this.personalInfo = new PersonalInfo(command.age(), command.incomeLevel());
+        public Lead(CreateLeadCommand command) {
+                this.sellerId = new SellerId(command.sellerId());
+                this.email = new EmailAddress(command.email());
+                this.personalInfo = new PersonalInfo(command.age(), command.incomeLevel());
 
-        this.contactInfo = command.phone() == null
-                ? new ContactInfo(command.fullName())
-                : new ContactInfo(command.fullName(), command.phone());
-        this.purchaseIntent = command.locationPreference() == null
-                ? new PurchaseIntent(command.minBedrooms())
-                : new PurchaseIntent(command.minBedrooms(), command.locationPreference());
+                this.contactInfo = command.phone() == null
+                                ? new ContactInfo(command.fullName())
+                                : new ContactInfo(command.fullName(), command.phone());
+                this.purchaseIntent = command.locationPreference() == null
+                                ? new PurchaseIntent(command.minBedrooms())
+                                : new PurchaseIntent(command.minBedrooms(), command.locationPreference());
 
-        this.bugdet = new Money(command.amount(), command.currency());
-        this.source = command.source();
-        this.status = LeadStatus.NEW;
-    }
+                this.bugdet = new Money(command.amount(), command.currency());
+                this.source = command.source();
+                this.status = LeadStatus.NEW;
+        }
 }
