@@ -25,7 +25,7 @@ public class LeadCommandServiceImpl implements LeadCommandService {
   // inherited javadoc
   @Override
   public Optional<Lead> handle(CreateLeadCommand command) {
-    if (repo.existsByEmailAndSource(command.email(), command.source())) {
+    if (repo.existsByEmail_EmailAndSource(command.email(), command.source())) {
       throw new IllegalArgumentException("A lead with this email and source already exists.");
     }
 
