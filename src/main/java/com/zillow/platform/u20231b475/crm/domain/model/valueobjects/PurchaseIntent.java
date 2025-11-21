@@ -10,5 +10,10 @@ import jakarta.validation.constraints.NotNull;
  * @author Valentino Solis
  */
 @Embeddable
-public record PurchaseIntent(String locationPreference, @NotNull @Min(1) Integer minBedrooms) {
+public record PurchaseIntent(@NotNull(message = "the minimum number of rooms is required") @Min(1) Integer minBedrooms,
+        String locationPreference) {
+
+    public PurchaseIntent(Integer minBedrooms) {
+        this(minBedrooms, null);
+    }
 }
