@@ -2,6 +2,8 @@ package com.zillow.platform.u20231b475.crm.application.internal.commandservices;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.zillow.platform.u20231b475.crm.domain.model.aggregates.Lead;
 import com.zillow.platform.u20231b475.crm.domain.model.commands.CreateLeadCommand;
 import com.zillow.platform.u20231b475.crm.domain.services.LeadCommandService;
@@ -12,6 +14,7 @@ import com.zillow.platform.u20231b475.crm.infrastructure.persistence.jpa.reposit
  * 
  * @author Valentino Solis
  */
+@Service
 public class LeadCommandServiceImpl implements LeadCommandService {
   private final LeadRepository repo;
 
