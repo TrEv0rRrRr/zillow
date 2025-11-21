@@ -9,5 +9,9 @@ import jakarta.validation.constraints.NotBlank;
  * @author Valentino Solis
  */
 @Embeddable
-public record ContactInfo(@NotBlank String fullName, Integer phone) {
+public record ContactInfo(@NotBlank(message = "Full name is required") String fullName, Integer phone) {
+
+  public ContactInfo(String fullName) {
+    this(fullName, null);
+  }
 }
