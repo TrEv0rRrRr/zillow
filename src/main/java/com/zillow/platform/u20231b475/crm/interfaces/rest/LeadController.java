@@ -39,6 +39,14 @@ public class LeadController {
     this.service = service;
   }
 
+  /**
+   * Create a new Lead
+   * 
+   * @param sellerId The seller id
+   * @param resource The {@link CreateLeadResource} instance
+   * @return A {@link LeadResource} resource for the created Lead, or a bad
+   *         request response if the lead could not be created.
+   */
   @PostMapping("/{sellerId}/leads")
   @Operation(summary = "Creates a new Lead")
   @ApiResponses(value = {
