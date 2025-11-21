@@ -25,7 +25,7 @@ public interface LeadRepository extends JpaRepository<Lead, Long> {
    * 
    * @author Valentino Solis
    */
-  Optional<Lead> findByEmailAndSource(String email, LeadSource source);
+  Optional<Lead> findByEmail_EmailAndSource(String email, LeadSource source);
 
   /**
    * Check if a lead exists by the given properties
@@ -34,5 +34,5 @@ public interface LeadRepository extends JpaRepository<Lead, Long> {
    * @param source The lead source
    * @return True if the Lead exists, otherwise false
    */
-  boolean existsByEmailAndSource(String email, LeadSource source);
+  boolean existsByEmail_EmailAndSource(String email, LeadSource source);
 }
