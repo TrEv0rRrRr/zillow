@@ -75,8 +75,14 @@ public class Lead extends AuditableAbstractAggregateRoot<Lead> {
     this.sellerId = new SellerId(command.sellerId());
     this.email = new EmailAddress(command.email());
     this.personalInfo = new PersonalInfo(command.age(), command.incomeLevel());
-    this.contactInfo = new ContactInfo(command.fullName(), command.phone());
-    this.purchaseIntent = new PurchaseIntent(command.locationPreference(), command.minBedrooms());
+
+    this.contactInfo = command.phone() == null
+        ? new ContactInfo(command.fullName())
+        : new ContactInfo(command.fullName(), command.phone());
+    this.purchaseIntent = command.locationPreference() == null
+        ? new PurchaseIntent(command.minBedrooms())
+        : new PurchaseIntent(command.minBedrooms(), command.locationPreference());
+
     this.bugdet = new Money(command.amount(), command.currency());
     this.source = command.source();
     this.status = LeadStatus.NEW;
