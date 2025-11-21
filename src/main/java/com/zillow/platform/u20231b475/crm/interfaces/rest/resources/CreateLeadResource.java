@@ -7,7 +7,7 @@ import jakarta.validation.constraints.*;
 /**
  * Resource for creating a lead
  */
-public record CreateLeadResource(@NotNull(message = "Seller Id is required") @Min(1) Long sellerId,
+public record CreateLeadResource(
     @NotBlank(message = "Email is required") @Email(message = "Invalid email format") String email,
     @NotNull(message = "Age is required") @Min(18) @Max(100) Integer age,
     @NotNull(message = "Income level is required") @Min(1) Integer incomeLevel,
@@ -20,6 +20,6 @@ public record CreateLeadResource(@NotNull(message = "Seller Id is required") @Mi
 
   public CreateLeadResource {
     if (!"USD".equals(currency))
-      throw new IllegalArgumentException("Currency must be 'USD.");
+      throw new IllegalArgumentException("Currency must be 'USD'.");
   }
 }
