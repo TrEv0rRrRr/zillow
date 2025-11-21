@@ -19,7 +19,7 @@ public record CreateLeadResource(
     LeadSource source) {
 
   public CreateLeadResource {
-    if (!"USD".equals(currency))
-      throw new IllegalArgumentException("Currency must be 'USD'.");
+    if (currency != null && !"USD".equals(currency.trim()))
+      throw new IllegalArgumentException("Currency must be 'USD'. Received: '" + currency + "'");
   }
 }
